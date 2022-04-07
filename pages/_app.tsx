@@ -1,8 +1,21 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import { useStore } from "../store";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+    const persistor = persistStore(useStore);
 
-export default MyApp
+    return (
+        <Provider store={useStore}>
+            <PersistGate persistor={persistor}>
+              <Component {...pageProps} />
+            </PersistGate>
+        </Provider>
+    );
+};
+
+export default CustomApp;
+
+
