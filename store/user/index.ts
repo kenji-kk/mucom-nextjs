@@ -11,8 +11,9 @@ export type UpdateUserPayload = User;
 
 // 初期値
 const initialState: UserState = {
-    username: "Next.js",
-    email: "next@gmail.com"
+    username: "",
+    email: "",
+    
 };
 
 export type UpdateUser = {
