@@ -1,4 +1,8 @@
-import * as React from 'react';
+import { useState } from 'react';
+import client from '../../api/client';
+import { useDispatch } from 'react-redux';
+import { userSlice } from '../../store/user';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,14 +19,26 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
 export const SignUpPage = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  const onSubmit = async (e:any) => {
+    e.preventDefault()
+    client
+    .post('signup',
+    {UserName: userName, Email: email, Password: password},
+    { headers: {'Content-Type': 'application/json'}, responseType: 'json' }
+    )
+    .then(response => {
+      dispatch(
+        userSlice.actions.signupUser(response.data.user)
+      )
+      console.log(response.data.user)
     });
-  };
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -42,7 +58,7 @@ export const SignUpPage = () => {
           <Typography component="h1" variant="h5">
             サインアップ
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -53,6 +69,8 @@ export const SignUpPage = () => {
                   id="userName"
                   label="ユーザー名"
                   autoFocus
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -63,6 +81,8 @@ export const SignUpPage = () => {
                   label="メールアドレス"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -74,6 +94,8 @@ export const SignUpPage = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -82,6 +104,7 @@ export const SignUpPage = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={onSubmit}
             >
               サインアップ
             </Button>
