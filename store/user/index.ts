@@ -3,7 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export type User = {
   userName: string | null
   email: string | null
-  jwt: string | null
+  createdAt: string | null
+  updatedAt: string | null
 }
 
 export type UserState = {
@@ -17,7 +18,8 @@ const initialState: UserState = {
     user: {
       userName: "",
       email: "",
-      jwt: "",
+      createdAt: "",
+      updatedAt: "",
     }
 
 };
@@ -25,7 +27,8 @@ const initialState: UserState = {
 export type signupUser = {
     userName: string;
     email: string
-    jwt: string
+    createdAt: string
+    updatedAt: string
 };
 
 export const userSlice = createSlice({
