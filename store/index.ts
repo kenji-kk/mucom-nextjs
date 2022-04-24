@@ -15,6 +15,7 @@ import {
 } from 'redux-persist'
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 import { userSlice } from './user'
+import { authSlice } from './auth'
 
 // https://github.com/vercel/next.js/discussions/15687#discussioncomment-45319
 const createNoopStorage = () => {
@@ -37,6 +38,7 @@ const storage =
 
 const rootReducer = combineReducers({
   user: userSlice.reducer,
+  auth: authSlice.reducer,
 })
 
 

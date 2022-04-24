@@ -5,13 +5,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import { useStore } from "../store";
 
 const CustomApp = ({ Component, pageProps }: AppProps): JSX.Element => {
-    const persistor = persistStore(useStore);
 
     return (
         <Provider store={useStore}>
-            <PersistGate persistor={persistor}>
               <Component {...pageProps} />
-            </PersistGate>
         </Provider>
     );
 };

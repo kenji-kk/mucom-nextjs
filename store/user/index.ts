@@ -1,23 +1,34 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type User = {
-    username: string;
-    email: string;
-};
+  userName: string | null
+  email: string | null
+  createdAt: string | null
+  updatedAt: string | null
+}
 
-export type UserState = User;
+export type UserState = {
+  user: User
+}
 
 export type UpdateUserPayload = User;
 
 // 初期値
 const initialState: UserState = {
-    username: "Next.js",
-    email: "next@gmail.com"
+    user: {
+      userName: "",
+      email: "",
+      createdAt: "",
+      updatedAt: "",
+    }
+
 };
 
-export type UpdateUser = {
-    username: string;
+export type signupUser = {
+    userName: string;
     email: string
+    createdAt: string
+    updatedAt: string
 };
 
 export const userSlice = createSlice({
@@ -25,11 +36,8 @@ export const userSlice = createSlice({
     initialState,
     // ユーザーのストアを変更する関数を定義
     reducers: {
-        updateUser(
-            state,
-            action: PayloadAction<UpdateUser>,
-        ) {
-            return { ...state, ...action.payload };
+        signupUser(state,action: PayloadAction<signupUser>,) {
+          state.user = action.payload
         },
         reset() {
             return { ...initialState };
