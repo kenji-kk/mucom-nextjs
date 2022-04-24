@@ -2,6 +2,9 @@ import { useState } from 'react';
 import client from '../../api/client';
 import { useDispatch } from 'react-redux';
 import { userSlice } from '../../store/user';
+import { authSlice } from '../../store/auth';
+import Router from 'next/router'
+import Cookies from 'js-cookie';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -18,7 +21,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export const SignUpPage = () => {
+export const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -36,7 +39,17 @@ export const SignUpPage = () => {
       dispatch(
         userSlice.actions.signupUser(response.data.user)
       )
-      console.log(response.data.user)
+      dispatch(
+        authSlice.actions.authSignup(
+          {
+            jwt: response.data.jwt,
+            isSignedIn: true,
+            loading: false,
+          }
+      )
+      )
+      Cookies.set('_access_token', response.data.jwt)
+      Router.push('/user')
     });
   }
 
