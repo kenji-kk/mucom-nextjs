@@ -6,6 +6,11 @@ import { authSlice } from '../../store/auth';
 import Router from 'next/router'
 import Cookies from 'js-cookie';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store'
+
+import { LoadingCircular } from '../atoms/LoadinCircular';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,9 +22,19 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 
 
 const theme = createTheme();
+
+const useStyles = makeStyles({
+  LoadingCircularWrap: {
+    width: '30vw',
+    height: '50vh',
+    margin: '40vh auto 0 auto',
+    textAlign: 'center',
+  },
+})
 
 interface PROPS {
   setFormToggle: (value: boolean) => void;
@@ -30,10 +45,18 @@ export const SignupPage: React.VFC<PROPS> = ({setFormToggle}) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
+  const auth = useSelector((state: RootState) => state.auth)
+  const {loading} = auth.auth
+
+  const classes = useStyles();
+
   const dispatch = useDispatch();
 
   const onSubmit = async (e:any) => {
     e.preventDefault()
+    dispatch(
+      authSlice.actions.authSetLoading(true)
+    )
     client
     .post('signup',
     {UserName: userName, Email: email, Password: password},
@@ -53,11 +76,17 @@ export const SignupPage: React.VFC<PROPS> = ({setFormToggle}) => {
       )
       )
       Cookies.set('_access_token', response.data.jwt)
+      dispatch(
+        authSlice.actions.authSetLoading(false)
+      )
       Router.push('/user')
     });
   }
 
   return (
+    <>
+    {loading ?
+    <div  className={classes.LoadingCircularWrap}><LoadingCircular /></div> :
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -136,5 +165,7 @@ export const SignupPage: React.VFC<PROPS> = ({setFormToggle}) => {
         </Box>
       </Container>
     </ThemeProvider>
+      }
+    </>   
   );
 }

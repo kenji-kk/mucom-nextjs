@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import Router from 'next/router'
 import Cookies from 'js-cookie';
 
@@ -11,9 +11,8 @@ import { AuthPage } from '../pages/AuthPage';
 export const Private = ({children}: {children: React.ReactElement}) => {
   const dispatch = useDispatch()
   const auth = useSelector((state: RootState) => state.auth)
-  const {loading, isSignedIn, jwt} = auth.auth
+  const {isSignedIn, jwt} = auth.auth
 
-  if (!loading) {
     if (isSignedIn) {
       return children
     } else {
@@ -29,8 +28,6 @@ export const Private = ({children}: {children: React.ReactElement}) => {
         return <AuthPage />
       }
     }
-  } else {
-    return <></>
-  }
+  
 }
 
