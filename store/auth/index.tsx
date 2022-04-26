@@ -42,6 +42,9 @@ export const authSlice = createSlice({
         authSetIsSignedIn(state,action: PayloadAction<boolean>) {
           state.auth.isSignedIn = action.payload
         },
+        authSetLoading(state,action: PayloadAction<boolean>) {
+          state.auth.loading = action.payload
+        },
         reset() {
             return { ...initialState };
         },
