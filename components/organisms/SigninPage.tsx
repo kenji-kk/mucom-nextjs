@@ -21,9 +21,12 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export const SignupPage = () => {
+interface PROPS {
+  setFormToggle: (value: boolean) => void;
+}
+
+export const SigninPage:React.VFC<PROPS> = ({setFormToggle}) => {
   const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
@@ -31,8 +34,8 @@ export const SignupPage = () => {
   const onSubmit = async (e:any) => {
     e.preventDefault()
     client
-    .post('signup',
-    {UserName: userName, Email: email, Password: password},
+    .post('signin',
+    { Email: email, Password: password},
     { headers: {'Content-Type': 'application/json'}, responseType: 'json' }
     )
     .then(response => {
@@ -69,23 +72,10 @@ export const SignupPage = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            サインアップ
+            サインイン
           </Typography>
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="userName"
-                  required
-                  fullWidth
-                  id="userName"
-                  label="ユーザー名"
-                  autoFocus
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -119,13 +109,13 @@ export const SignupPage = () => {
               sx={{ mt: 3, mb: 2 }}
               onClick={onSubmit}
             >
-              サインアップ
+              サインイン
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  アカウントをお持ちの方はこちら
-                </Link>
+                <Button onClick={() => setFormToggle(false)}>
+                  アカウントをお持ちでない方はこちら
+                </Button>
               </Grid>
             </Grid>
           </Box>
