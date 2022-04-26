@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store'
 import { authSlice } from '../../store/auth';
-import { SignupPage } from '../../components/pages/SignupPage';
+import { AuthPage } from '../pages/AuthPage';
 
 
 export const Private = ({children}: {children: React.ReactElement}) => {
@@ -26,7 +26,7 @@ export const Private = ({children}: {children: React.ReactElement}) => {
         ))
         return children
       } else {
-        return <SignupPage />
+        return <AuthPage />
       }
     }
   } else {
