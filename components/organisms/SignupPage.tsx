@@ -98,7 +98,7 @@ export const SignupPage: VFC<PROPS> = ({setFormToggle}) => {
     )
     .then(response => {
       dispatch(
-        userSlice.actions.Usersign(response.data.user)
+        userSlice.actions.userSign(response.data.user)
       )
       dispatch(
         authSlice.actions.authSign(
