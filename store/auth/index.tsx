@@ -33,7 +33,7 @@ export const authSlice = createSlice({
     initialState,
     // ユーザーのストアを変更する関数を定義
     reducers: {
-        authSignup(state,action: PayloadAction<authSignup>,) {
+        authSign(state,action: PayloadAction<authSignup>,) {
           state.auth = action.payload
         },
         authSetJWT(state,action: PayloadAction<string | undefined>) {

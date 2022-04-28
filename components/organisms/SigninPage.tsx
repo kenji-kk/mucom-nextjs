@@ -1,32 +1,30 @@
-import { useState } from 'react';
-import client from '../../api/client';
-import { useDispatch } from 'react-redux';
-import { userSlice } from '../../store/user';
-import { authSlice } from '../../store/auth';
+import { useState, VFC } from 'react'
+import client from '../../api/client'
+import { useDispatch } from 'react-redux'
+import { userSlice } from '../../store/user'
+import { authSlice } from '../../store/auth'
 import Router from 'next/router'
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 
-import { LoadingCircular } from '../atoms/LoadinCircular';
+import { LoadingCircular } from '../atoms/LoadinCircular'
 
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { makeStyles } from '@mui/styles';
-
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+import CssBaseline from '@mui/material/CssBaseline'
+import TextField from '@mui/material/TextField'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 
 
 const theme = createTheme();
@@ -63,7 +61,7 @@ const schema = yup.object({
     .max(32,"30文字以下で入力してください")
 })
 
-export const SigninPage:React.VFC<PROPS> = ({setFormToggle}) => {
+export const SigninPage: VFC<PROPS> = ({setFormToggle}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -93,10 +91,10 @@ export const SigninPage:React.VFC<PROPS> = ({setFormToggle}) => {
     )
     .then(response => {
       dispatch(
-        userSlice.actions.signupUser(response.data.user)
+        userSlice.actions.userSign(response.data.user)
       )
       dispatch(
-        authSlice.actions.authSignup(
+        authSlice.actions.authSign(
           {
             jwt: response.data.jwt,
             isSignedIn: true,

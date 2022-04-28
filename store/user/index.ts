@@ -36,7 +36,7 @@ export const userSlice = createSlice({
     initialState,
     // ユーザーのストアを変更する関数を定義
     reducers: {
-        signupUser(state,action: PayloadAction<signupUser>,) {
+        userSign(state,action: PayloadAction<signupUser>,) {
           state.user = action.payload
         },
         reset() {

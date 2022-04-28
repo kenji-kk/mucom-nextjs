@@ -1,6 +1,7 @@
-import * as React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
-import { makeStyles } from '@mui/styles';
+import { VFC } from 'react'
+import CircularProgress from '@mui/material/CircularProgress'
+import { makeStyles } from '@mui/styles'
+
 
 const useStyles = makeStyles({
   CircularProgressWrap: {
@@ -8,7 +9,7 @@ const useStyles = makeStyles({
   },
 })
 
-export const LoadingCircular = () => {
+export const LoadingCircular: VFC = () => {
   const classes = useStyles();
 
   return (
