@@ -83,7 +83,6 @@ export const SigninPage:React.VFC<PROPS> = ({setFormToggle}) => {
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<FormInputType> = async (e:any) => {
-    e.preventDefault()
     dispatch(
       authSlice.actions.authSetLoading(true)
     )
