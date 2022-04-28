@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import Router from 'next/router'
+import { VFC } from 'react'
 import Cookies from 'js-cookie';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,10 +7,10 @@ import { authSlice } from '../../store/auth';
 import { AuthPage } from '../pages/AuthPage';
 
 
-export const Private = ({children}: {children: React.ReactElement}) => {
+export const Private: VFC<{children: React.ReactElement}> = ({children}) => {
   const dispatch = useDispatch()
   const auth = useSelector((state: RootState) => state.auth)
-  const {isSignedIn, jwt} = auth.auth
+  const { isSignedIn } = auth.auth
 
     if (isSignedIn) {
       return children

@@ -1,9 +1,9 @@
-import React from 'react'
+import { VFC } from 'react'
 
 import { Private } from '../../components/templates/Private'
 import { UserPage } from '../../components/pages/UserPage'
 
-const User = () => {
+const User: VFC = () => {
 
   return (
     <Private>

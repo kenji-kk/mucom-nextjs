@@ -1,6 +1,6 @@
-import React from 'react'
+import { VFC } from 'react'
 
-export const UserPage = () => {
+export const UserPage: VFC = () => {
   return (
     <div>UserPage</div>
   )
