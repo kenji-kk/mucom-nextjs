@@ -25,6 +25,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
+import { Alert } from '@mui/material'
 
 
 const theme = createTheme();
@@ -71,6 +72,7 @@ export const SignupPage: VFC<PROPS> = ({setFormToggle}) => {
   const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [responseError, setResponseError] = useState(false);
 
   const auth = useSelector((state: RootState) => state.auth)
   const {loading} = auth.auth
@@ -114,7 +116,16 @@ export const SignupPage: VFC<PROPS> = ({setFormToggle}) => {
         authSlice.actions.authSetLoading(false)
       )
       Router.push('/user')
-    });
+    }
+    )
+    .catch(error => {
+      dispatch(
+        authSlice.actions.authSetLoading(false)
+      )
+      console.log(error)
+      setResponseError(true)
+    }
+    )
   }
 
   return (
@@ -170,6 +181,7 @@ export const SignupPage: VFC<PROPS> = ({setFormToggle}) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+                {responseError && <Alert severity="error">登録されているメールアドレスの可能性があります</Alert>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
