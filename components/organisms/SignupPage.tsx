@@ -181,7 +181,7 @@ export const SignupPage: VFC<PROPS> = ({setFormToggle}) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {responseError && <Alert severity="error">存在するメールアドレスの可能性があります</Alert>}
+                {responseError && <Alert severity="error">登録されているメールアドレスの可能性があります</Alert>}
               </Grid>
               <Grid item xs={12}>
                 <TextField

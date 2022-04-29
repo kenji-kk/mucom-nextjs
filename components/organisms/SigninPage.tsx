@@ -25,6 +25,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
+import { Alert } from '@mui/material'
 
 
 const theme = createTheme();
@@ -64,6 +65,8 @@ const schema = yup.object({
 export const SigninPage: VFC<PROPS> = ({setFormToggle}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [responseError, setResponseError] = useState(false);
+
 
   const auth = useSelector((state: RootState) => state.auth)
   const {loading} = auth.auth
@@ -107,7 +110,15 @@ export const SigninPage: VFC<PROPS> = ({setFormToggle}) => {
         authSlice.actions.authSetLoading(false)
       )
       Router.push('/user')
-    });
+    })
+    .catch(error => {
+      setResponseError(true)
+      console.log(error)
+      dispatch(
+        authSlice.actions.authSetLoading(false)
+        )
+        }
+        )
   }
 
   return (
@@ -167,6 +178,7 @@ export const SigninPage: VFC<PROPS> = ({setFormToggle}) => {
                     />
                   </Grid>
                 </Grid>
+                {responseError && <Alert severity="error">登録されていないメールアドレスもしくはパスワードが間違っている可能性があります</Alert>}
                 <Button
                   type="submit"
                   fullWidth
