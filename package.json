@@ -9,10 +9,9 @@
     "lint": "next lint"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "yarn lint",
-      "yarn format",
-      "yarn lint:fix"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write --ignore-path .gitignore"
     ]
   },
   "dependencies": {
