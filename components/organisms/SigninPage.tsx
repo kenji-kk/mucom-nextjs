@@ -28,6 +28,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { Alert } from "@mui/material";
 import { margin } from "@mui/system";
+import Link from "next/link";
 
 const theme = createTheme();
 
@@ -178,7 +179,7 @@ export const SigninPage: VFC<PROPS> = ({ setFormToggle }) => {
                             <MusicOffIcon />
                           </Avatar>
                         </Box>
-                        <Typography sx={{ width: "100%", margin: "10px" }}>
+            -            <Typography sx={{ width: "100%", margin: "10px" }}>
                           話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ
                         </Typography>
                       </Box>
@@ -246,6 +247,9 @@ export const SigninPage: VFC<PROPS> = ({ setFormToggle }) => {
               </Box>
             </Box>
           </Container>
+          <Typography>
+            <Link href="/timeline">timelineに遷移</Link>
+          </Typography>
         </ThemeProvider>
       )}
     </>
