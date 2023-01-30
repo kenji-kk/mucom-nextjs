@@ -179,7 +179,8 @@ export const SigninPage: VFC<PROPS> = ({ setFormToggle }) => {
                             <MusicOffIcon />
                           </Avatar>
                         </Box>
-            -            <Typography sx={{ width: "100%", margin: "10px" }}>
+                        -{" "}
+                        <Typography sx={{ width: "100%", margin: "10px" }}>
                           話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ話題の音楽の口コミ
                         </Typography>
                       </Box>
@@ -247,9 +248,6 @@ export const SigninPage: VFC<PROPS> = ({ setFormToggle }) => {
               </Box>
             </Box>
           </Container>
-          <Typography>
-            <Link href="/timeline">timelineに遷移</Link>
-          </Typography>
         </ThemeProvider>
       )}
     </>
