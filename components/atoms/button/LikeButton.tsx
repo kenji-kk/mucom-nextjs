@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { IconButton } from "@mui/material";
 
-const likeButton = () => {
-  const count = 0;
+const LikeButton = () => {
+  const [count, setCount] = useState(0);
+
+  const handlerLikeClick = () => {
+    if (count == 10) {
+      console.log("これ以上入れない");
+    } else {
+      setCount(count + 1);
+    }
+  };
 
   return (
-    <span className="likeButton">
+    <IconButton className="likeButton" onClick={handlerLikeClick}>
       <FavoriteIcon />
       {count}
-    </span>
+    </IconButton>
   );
 };
 
-export default likeButton;
+export default LikeButton;

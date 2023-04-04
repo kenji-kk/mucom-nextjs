@@ -83,12 +83,12 @@ export const SigninPage: VFC<PROPS> = ({ setFormToggle }) => {
   });
 
   const dispatch = useDispatch();
-
+  console.log("login前");
   const onSubmit: SubmitHandler<FormInputType> = async (e: any) => {
     dispatch(authSlice.actions.authSetLoading(true));
     client
       .post(
-        "signin",
+        "http://localhost:8080/signin",
         { Email: email, Password: password },
         {
           headers: { "Content-Type": "application/json" },

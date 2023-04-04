@@ -1,40 +1,29 @@
-import React from "react";
+import React, { VFC } from "react";
 import LikeButton from "../atoms/button/LikeButton";
 import MusicStartButton from "../atoms/button/MusicStartButton";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Container, Typography } from "@mui/material";
+import { Card, CardContent, Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { Review } from "../../lib/model/reviewsModel";
 const theme = createTheme();
 
-// const TweetCard = (props) => {
-const TweetCard = () => {
+type Props = {
+  review: Review;
+};
+
+const TweetCard: VFC<Props> = ({ review }) => {
   return (
-    <div>
-      <ThemeProvider theme={theme}>
-        <Box border={1} borderRadius={5}>
-          <Typography
-            fontSize={`2rem`}
-            component="h1"
-            variant="h5"
-            fontFamily={`din`}
-            marginLeft={`2rem`}
-          >
-            this.props
-          </Typography>
-          <Container component="main" maxWidth="md">
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-              }}
-            >
-              <LikeButton />
-              <MusicStartButton />
-            </Box>
-          </Container>
-        </Box>
-      </ThemeProvider>
-    </div>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Card sx={{ width: "80%" }} variant="outlined">
+        <CardContent>
+          <Typography variant="body1">{review.Content}</Typography>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <LikeButton />
+            <MusicStartButton />
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 
